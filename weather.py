@@ -13,13 +13,13 @@ def format_temperature(temp):
 #     Returns:
 #         A string contain the temperature and "degrees celcius."
 #     """
-return f"{temp}{DEGREE_SYBMOL}"
+    return f"{temp}{DEGREE_SYBMOL}"
 
 
 def convert_date(iso_string):
     date = datetime.fromisoformat(iso_string)
     formatted_date = date.strftime ("%A %d %B %Y")
-    return formatted_date
+    return formatted_date 
 
     # """Converts and ISO formatted date into a human readable format.
 
@@ -46,8 +46,11 @@ def convert_f_to_c(temp_in_farenheit):
 
 
 def calculate_mean(weather_data):
-
- 
+    total = 0 
+    for temp in weather_data:
+        total += float(temp) 
+    mean = total / len(weather_data) 
+    return mean
     # """Calculates the mean value from a list of numbers.
     # Args:
     #     weather_data: a list of numbers.
@@ -56,19 +59,25 @@ def calculate_mean(weather_data):
     # """
     # pass
 
-
-def load_data_from_csv(csv_file):
-    """Reads a csv file and stores the data in a list.
-
-    Args:
-        csv_file: a string representing the file path to a csv file.
-    Returns:
-        A list of lists, where each sublist is a (non-empty) line in the csv file.
-    """
-    pass
+def load_data_from_csv(csv_file_location):
+    weather = [] #creating empty list
+    with open (csv_file_location) as csv_file: #opening csv file
+        reader = csv.reader(csv_file) #reading
+        next (reader) #skipping headers
+        for line in reader: #for loop for each row in csv
+            if len(line) > 0: #if the row is not empty
+                weather.append([line[0], int(line[1]), int(line[2])]) #run the following. Appending data from empty row to list. A list within a list. Turned some strings into integers and making sure we are returning the right type of data
+    return weather #return the list
 
 
 def find_min(weather_data):
+    min_index = (0)
+    min_value = 
+    for 
+    if min
+    return ()
+    return (min_index , temp)
+    
     """Calculates the minimum value in a list of numbers.
 
     Args:
