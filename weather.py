@@ -119,10 +119,9 @@ def find_max(weather_data):
 
 def generate_summary(weather_data):
     mins=[]
+    max=[]
     for item in weather_data :
         mins.append(convert_f_to_c(item[1]))
-    max=[]
-    for items in weather_data:
         max.append(convert_f_to_c(item[2]))
 
     min_temp=find_min(mins)  
@@ -138,7 +137,7 @@ def generate_summary(weather_data):
     avg_high_temp= calculate_mean(max)
     formatted_avg_high_temp=format_temperature (avg_high_temp)
     summary=(f"{len(weather_data)} Day Overview\n\
- The lowest temperature will be {formatted_min_temp}, and will occur on {formatted_min_date}.\n\
+  The lowest temperature will be {formatted_min_temp}, and will occur on {formatted_min_date}.\n\
   The highest temperature will be {formatted_max_temp}, and will occur on {formatted_max_date}.\n\
   The average low this week is {formatted_avg_low_temp}.\n\
   The average high this week is {formatted_avg_high_temp}.\n\
