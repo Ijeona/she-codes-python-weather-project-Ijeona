@@ -71,12 +71,19 @@ def load_data_from_csv(csv_file_location):
 
 
 def find_min(weather_data):
-    min_index = (0)
-    min_value = 
-    for 
-    if min
-    return ()
-    return (min_index , temp)
+
+    if len(weather_data)==0:
+        return() 
+
+    min_index = 0
+    min_value = float(weather_data[0])
+    for item in range(len(weather_data)):
+        value = float(weather_data [item])
+        if value <= min_value:
+            min_value = value 
+            min_index = item
+
+    return (min_value,min_index)
     
     """Calculates the minimum value in a list of numbers.
 
@@ -96,10 +103,48 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list.
     """
-    pass
+    
+    if len(weather_data)==0:
+        return() 
 
+    max_index = 0
+    max_value = float(weather_data[0])
+    for item in range(len(weather_data)):
+        value = float(weather_data [item])
+        if value >= max_value:
+            max_value = value 
+            max_index = item
+
+    return (max_value,max_index)
 
 def generate_summary(weather_data):
+    mins=[]
+    for item in weather_data :
+        mins.append(convert_f_to_c(item[1]))
+    max=[]
+    for items in weather_data:
+        max.append(convert_f_to_c(item[2]))
+
+    min_temp=find_min(mins)  
+    formatted_min_temp = format_temperature(min_temp[0])
+    formatted_min_date = convert_date(weather_data[min_temp[1]][0])
+    max_temp=find_max(max)
+    formatted_max_temp = format_temperature(max_temp[0])
+    formatted_max_date= convert_date(weather_data[max_temp[1]][0])
+    print(max)
+    print (max_temp)
+    avg_low_temp=calculate_mean (mins)
+    formatted_avg_low_temp=format_temperature(avg_low_temp)
+    avg_high_temp= calculate_mean(max)
+    formatted_avg_high_temp=format_temperature (avg_high_temp)
+    summary=(f"{len(weather_data)} Day Overview\n\
+ The lowest temperature will be {formatted_min_temp}, and will occur on {formatted_min_date}.\n\
+  The highest temperature will be {formatted_max_temp}, and will occur on {formatted_max_date}.\n\
+  The average low this week is {formatted_avg_low_temp}.\n\
+  The average high this week is {formatted_avg_high_temp}.\n\
+")
+    print (summary)
+    return (summary)
     """Outputs a summary for the given weather data.
 
     Args:
@@ -118,4 +163,14 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+  
+    daily_summary = "" #don't put into list because will still need to convert it into string anyways#
+    for item in weather_data:
+        formatted_date = convert_date(item[0])
+        min_temp_c = convert_f_to_c(item[1])
+        formatted_min_temp = format_temperature(min_temp_c)
+        max_temp_c = convert_f_to_c(item[2])
+        formatted_max_temp = format_temperature(max_temp_c)
+        daily_summary+=(f"---- {formatted_date} ----\n  Minimum Temperature: {formatted_min_temp}\n  Maximum Temperature: {formatted_max_temp}\n\n")
+    print(daily_summary)
+    return daily_summary
