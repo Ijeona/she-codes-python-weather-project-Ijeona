@@ -121,6 +121,7 @@ def generate_summary(weather_data):
     mins=[]
     max=[]
     for item in weather_data :
+       # print(item)
         mins.append(convert_f_to_c(item[1]))
         max.append(convert_f_to_c(item[2]))
 
@@ -130,12 +131,11 @@ def generate_summary(weather_data):
     max_temp=find_max(max)
     formatted_max_temp = format_temperature(max_temp[0])
     formatted_max_date= convert_date(weather_data[max_temp[1]][0])
-    print(max)
-    print (max_temp)
+    
     avg_low_temp=calculate_mean (mins)
-    formatted_avg_low_temp=format_temperature(avg_low_temp)
+    formatted_avg_low_temp=format_temperature(round(avg_low_temp,1))
     avg_high_temp= calculate_mean(max)
-    formatted_avg_high_temp=format_temperature (avg_high_temp)
+    formatted_avg_high_temp=format_temperature (round(avg_high_temp,1))
     summary=(f"{len(weather_data)} Day Overview\n\
   The lowest temperature will be {formatted_min_temp}, and will occur on {formatted_min_date}.\n\
   The highest temperature will be {formatted_max_temp}, and will occur on {formatted_max_date}.\n\
